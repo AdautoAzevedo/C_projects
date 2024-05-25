@@ -10,13 +10,19 @@ int main() {
 	printf("Value of var by dereferencing: %d\n",*pointer);
 	
 	//Pointer arithmetic
-	int arr[5] = {1,2,3,4,5};
+	int arr[5] = {10,20,30,40,50};
 	int *p = arr;
+	printf("%d\n", p);
+	printf("%d\n", *p);
 	int i;
-	for(int i = 0; i < 5; i++) {
+	for(i = 0; i < 5; i++) {
 		printf("Element %d: %d\n", i, *p);
 		p++;
 	}
+	
+	//Pointer to pointer
+	int **pp = &pointer;
+	printf("Value of var using a pointer to pointer: %d\n", **pp);
 	
 }
 
