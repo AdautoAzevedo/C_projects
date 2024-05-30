@@ -6,6 +6,7 @@ int main() {
 	int *pointer = &var;
 	
 	printf("Value of var: %d\n", var);
+	printf("Value of var using &: %d\n", &var);
 	printf("Value of memory address of var: %d\n", pointer);
 	printf("Value of var by dereferencing: %d\n",*pointer);
 	
