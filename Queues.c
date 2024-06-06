@@ -11,11 +11,15 @@ typedef struct {
 
 Queue queue;
 int isEmpty() {
-	return queue.front == -1 || queue.front > queue.rear;
+	return queue.front == -1;
+}
+
+int isFull() {
+	return queue.rear == MAX-1;
 }
 
 void enqueue(int value) {
-	if (queue.rear == MAX -1) {
+	if (isFull()) {
 		printf("Queue overflow\n");
 		return;
 	}
@@ -24,19 +28,21 @@ void enqueue(int value) {
 		queue.front = 0;
 	}
 	
-	queue.data[queue.rear] = value;
 	queue.rear++;
-	printf("\nResult of operation: \nData Rear value: %d \nRear value: %d ", queue.data[queue.rear-1], queue.rear);
+	queue.data[queue.rear] = value;
+	printf("Enqueued: %d\n", queue.data[queue.rear]);
 	
 }
 
 void dequeue() {
 	if (isEmpty()) {
 		printf("\nQueue underflow");
-		return -1;
-	}
-	printf("\nValue to be removed: %d", queue.data[queue.front]);
-	return queue.data[(queue.front)++];
+		system("pause");
+	} 
+	
+	printf("\nDequeued: %d\n", queue.data[queue.front]);
+	queue.front++;
+	
 }
 
 int main() {
@@ -48,12 +54,7 @@ int main() {
 	enqueue(30);
 	
 	dequeue();
-	printf("\nValue of queue.front after removal: %d", queue.front);
-	printf("\nValue of first item in array: %d", queue.data[(queue.front)]);
 	dequeue();
-	printf("\nValue of queue.front after removal: %d", queue.front++);
-	printf("\nValue of first item in array: %d", queue.data[(queue.front)]);
 	dequeue();
-	printf("\nValue of queue.front after removal: %d", queue.front++);
-	printf("\nValue of first item in array: %d", queue.data[(queue.front)]);
+	
 }
