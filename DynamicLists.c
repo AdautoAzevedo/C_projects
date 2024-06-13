@@ -27,6 +27,12 @@ void insertAtEnd(struct Node** head, int data) {
 	temp->next = newNode;
 }
 
+void insertAtTheBeginning(struct Node** head, int data) {
+	struct Node* newNode = createNode(data);
+	newNode->next = *head;
+	*head = newNode;
+}
+
 void printList(struct Node* node) {
 	while (node != NULL) {
 		printf("%d -> ", node->data);
@@ -45,6 +51,12 @@ int main() {
 	printf("\nLinked List: ");
 	printList(head);
 	
+	insertAtTheBeginning(&head, 100);
+	insertAtTheBeginning(&head, 200);
+	insertAtTheBeginning(&head, 0);
+	
+	printf("\nLinked List: ");
+	printList(head);
 	return 0;
 }
 
