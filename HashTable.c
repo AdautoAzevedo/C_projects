@@ -36,6 +36,18 @@ void insert(HashTable* hashTable, int key, int value) {
 	hashTable->table[index] = newNode;
 }
 
+int search(HashTable* hashTable, int key) {
+	int index = hashFunction(key);
+	Node* current = hashTable->table[index];
+	while (current != NULL) {
+		if (current->key == key) {
+			return current->value;
+		}
+		current = current->next;
+	}
+	return -1;
+}
+
 void printTable(HashTable* hashTable){
 	int i;
 	for (i = 0; i< TABLE_SIZE; i++) {
@@ -56,7 +68,11 @@ int main() {
 	insert(hashTable, 12, 30);
 	insert(hashTable, 22, 40);
 	
+	
 	printTable(hashTable);
+	
+	printf("Value for key 2: %d\n", search(hashTable, 2));
+	printf("Value for key 12: %d\n", search(hashTable, 12));
 	
 	return 0;
 }
