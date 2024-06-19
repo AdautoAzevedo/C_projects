@@ -50,15 +50,41 @@ int search(HashTable* hashTable, int key) {
 
 void printTable(HashTable* hashTable){
 	int i;
-	for (i = 0; i< TABLE_SIZE; i++) {
-		printf("Index %d: ", i);
+	for (i = 0; i < TABLE_SIZE; i++) { //This will loop through the the indexes and print them
+		printf("Index %d: ", i); 
 		Node* current = hashTable->table[i];
 		while (current != NULL) {
-			printf("-> (Key: %d, Value: %d)", current->key, current->value);
+			printf("-> (Key: %d, Value: %d)", current->key, current->value); //This print each any data in the index, if any exists
 			current = current->next;
 		}
 	printf("\n");
 	}
+}
+
+void delete(HashTable* hashTable, int key) {
+	int index = hashFunction(key);
+	Node* current = hashTable->table[index];
+	Node* prev = NULL;
+	
+	while (current != NULL & current->key != key) {
+		prev = current;
+		current = current->next;
+	}
+	
+	if (current == NULL) {
+		//Key not found
+		return;
+	}
+	
+	if( prev == NULL) {
+		hashTable->table[index] = current->next;
+	} else {
+		prev->next = current->next;
+	}
+	
+	free(current);
+	
+	
 }
 
 int main() {
@@ -74,5 +100,10 @@ int main() {
 	printf("Value for key 2: %d\n", search(hashTable, 2));
 	printf("Value for key 12: %d\n", search(hashTable, 12));
 	
+	delete(hashTable, 2);
+    printf("After deleting key 2:\n");
+    printTable(hashTable);
+
+
 	return 0;
 }
